@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Log Your Issue</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+	<body>
+	    <h2>Issue</h2>
+	    <form action="#" th:action="@{/atm/issue}" th:object="${issueLogged}" method="POST">
+	      <table>
+	    	<tr><td>Terminal ID</td>
+	    	    <td>
+	    	       <input type="text" th:field="*{terminalId}" />
+	    	       <label th:if="${#fields.hasErrors('terminalId')}" th:class="'error'">Enter the correct terminal ID</label>
+	    	    </td>
+	    	</tr>	    	
+	    	<tr><td>Issue Description</td>
+	    	    <td>
+	    	      <input type="text" th:field="*{issueDesc}" />
+	    	      <label th:if="${#fields.hasErrors('issueDesc')}"  th:class="'error'">Enter the issue description</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td>Branch Logger</td>
+	    	    <td>
+	    	      <input type="text" th:field="*{branchLogger}" />
+	    	      <label th:if="${#fields.hasErrors('branchLogger')}"  th:class="'error'">Enter the branch logger</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td>Logger Email</td>
+	    	    <td>
+	    	      <input type="email" th:field="*{loggerEmail}" />
+	    	      <label th:if="${#fields.hasErrors('loggerEmail')}"  th:class="'error'">Enter the correct logger email</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td>Logger Phone Number</td>
+	    	    <td>
+	    	      <input type="text" th:field="*{loggerPhoneNo}" />
+	    	      <label th:if="${#fields.hasErrors('loggerPhoneNo')}"  th:class="'error'">Enter the correct logger phone number</label>
+	    	    </td>
+	    	</tr>
+	    	<tr><td colspan="2">
+	              <input type="submit" th:value="Submit"/> 
+	              <input type="reset" th:value="Reset"/>
+	            </td>
+	        </tr>
+	      </table>  
+	    </form>
+	</body>
+</html>

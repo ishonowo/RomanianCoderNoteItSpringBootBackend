@@ -1,0 +1,9 @@
+2020-04-02 22:54:30.055  WARN 15368 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h26s789ms83µs).
+2020-04-04 10:13:09.632  WARN 15368 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1d11h18m53s557ms361µs600ns).
+2020-04-04 10:15:01.938  WARN 15368 --- [RMI TCP Connection(427)-127.0.0.1] javax.management.remote.misc             : The server has decided to close this client connection.
+2020-04-04 10:31:27.618  INFO 15368 --- [RMI TCP Connection(452)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-04-04 10:31:28.510 DEBUG 15368 --- [RMI TCP Connection(452)-127.0.0.1] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@18213ad3, started on Wed Apr 01 18:37:41 GMT+01:00 2020
+2020-04-04 10:31:41.786  INFO 15368 --- [RMI TCP Connection(452)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-04 10:31:42.566  INFO 15368 --- [RMI TCP Connection(452)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-04-04 10:31:51.003  INFO 15368 --- [RMI TCP Connection(452)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-04-04 10:31:52.062  INFO 15368 --- [RMI TCP Connection(452)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
