@@ -65,15 +65,7 @@ public class AtmIssueResolverController {
 		
 		logger.info("Form submitted successfully. "+ atmIssue);
 		
-		return atmIssue;
-		/*System.out.println(atmIssue);
-		modelAndView.setViewName("display_new");
-		modelAndView.addObject("atmIssue", atmIssue);
-		System.out.println(issueLogged);
-		return modelAndView;
-		redirectAttributes.addFlashAttribute("atmIssue",atmIssue);
-		return "redirect:email/sendEmail/";*/
-				
+		return atmIssue;				
 	}
 	
 	@PostMapping("/email")

@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 @CrossOrigin()
 public class EmailIssueController {
 
-	private static final Logger logger = LoggerFactory.getLogger(AtmIssueResolverController.class);
+	private static final Logger logger = LoggerFactory.getLogger(EmailIssueController.class);
 		
 	@Autowired
     private EmailIssueService emailIssueService;
@@ -36,12 +36,15 @@ public class EmailIssueController {
             throw new ValidationException("This email has errors and cannot be sent.");
         }
 		System.out.println("I am in sendEmail.");
-        emailIssueService.sendEmail(
+		emailIssueService.sendEmail(
         		emailIssue.getFrom(),
         		emailIssue.getTo(),
         		emailIssue.getCc(),
         		emailIssue.getSubject(),
-        		emailIssue.getBody());
+        		emailIssue.getmIntro(),
+        		emailIssue.getmHeader(),
+        		emailIssue.getmBody(),
+        		emailIssue.getmEnd());
         logger.info("Form submitted successfully. "+ emailIssue); 
         
     }

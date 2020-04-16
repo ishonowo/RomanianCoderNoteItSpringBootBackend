@@ -1,5 +1,7 @@
 package com.infinity.app.model;
 
+import java.util.Arrays;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,9 +11,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+//import org.springframework.beans.factory.annotation.Autowired;
+
 @Entity
 public class EmailIssue {
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@SequenceGenerator(name = "emailIssues", schema="dbo", sequenceName = "sq_emailIssues", allocationSize = 1)
@@ -34,8 +38,48 @@ public class EmailIssue {
 	private String subject;
 	
 	@NotNull
-	@Size(min = 50)
-	private String body;
+	private String mIntro;
+	
+	@NotNull
+	private String[] mHeader;
+	
+	@NotNull
+	private String[] mBody;
+	
+	@NotNull
+	private String  mEnd;
+
+	public String getmIntro() {
+		return mIntro;
+	}
+
+	public void setmIntro(String mIntro) {
+		this.mIntro = mIntro;
+	}
+
+	public String[] getmHeader() {
+		return mHeader;
+	}
+
+	public void setmHeader(String[] mHeader) {
+		this.mHeader = mHeader;
+	}
+
+	public String[] getmBody() {
+		return mBody;
+	}
+
+	public void setmBody(String[] mBody) {
+		this.mBody = mBody;
+	}
+
+	public String getmEnd() {
+		return mEnd;
+	}
+
+	public void setmEnd(String mEnd) {
+		this.mEnd = mEnd;
+	}
 
 	public Long getId() {
 		return id;
@@ -77,46 +121,55 @@ public class EmailIssue {
 		this.subject = subject;
 	}
 
-	public String getBody() {
-		return body;
-	}
 
-	public void setBody(String body) {
-		this.body = body;
-	}
-
-	public EmailIssue() {
-		super();
-	}
+	public EmailIssue() {}
 
 	public EmailIssue(Long id, @NotNull @Email String from, @NotNull @Size(min = 10) String to,
-			@NotNull @Size(min = 10) String cc, @NotNull @Size(min = 10) String subject,
-			@NotNull @Size(min = 50) String body) {
-		super();
+			@NotNull @Size(min = 10) String cc, @NotNull @Size(min = 10) String subject, @NotNull String mIntro,
+			@NotNull String[] mHeader, @NotNull String[] mBody, @NotNull String mEnd) {
 		this.id = id;
 		this.from = from;
 		this.to = to;
 		this.cc = cc;
 		this.subject = subject;
-		this.body = body;
+		this.mIntro = mIntro;
+		this.mHeader = mHeader;
+		this.mBody = mBody;
+		this.mEnd = mEnd;
 	}
 
-
 	public EmailIssue( @NotNull @Email String from, @NotNull @Size(min = 10) String to,
-			@NotNull @Size(min = 10) String cc, @NotNull @Size(min = 10) String subject,
-			@NotNull @Size(min = 50) String body) {
-		super();
+			@NotNull @Size(min = 10) String cc, @NotNull @Size(min = 10) String subject, @NotNull String mIntro,
+			@NotNull String[] mHeader, @NotNull String[] mBody, @NotNull String mEnd) {
 		this.from = from;
 		this.to = to;
 		this.cc = cc;
 		this.subject = subject;
-		this.body = body;
+		this.mIntro = mIntro;
+		this.mHeader = mHeader;
+		this.mBody = mBody;
+		this.mEnd = mEnd;
 	}
 
 	@Override
 	public String toString() {
 		return "EmailIssue [id=" + id + ", from=" + from + ", to=" + to + ", cc=" + cc + ", subject=" + subject
-				+ ", body=" + body + "]";
+				+ ", mIntro=" + mIntro + ", mHeader=" + Arrays.toString(mHeader) + ", mBody=" + Arrays.toString(mBody)
+				+ ", mEnd=" + mEnd + "]";
+	}
+
+	public String getBody() {
+		
+		String tableHead=""; 
+		for(String h : mHeader) { 
+			tableHead= "<th>"+h+"</th>";
+		}
+		String tableBody="";
+		for(String b :mBody) {
+			tableBody="<th>"+b+"</th>";
+		}
+		return "<p>"+ mIntro+"</p><table><thead><tr>"+ tableHead
+		        +"</tr></thead><tbody><tr>"+tableBody +"</tbody></table><br/><p>"+mEnd+"</p>";
 	}
 
 }
