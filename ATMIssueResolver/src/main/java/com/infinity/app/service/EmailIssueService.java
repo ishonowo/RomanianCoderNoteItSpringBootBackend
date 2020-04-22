@@ -47,6 +47,7 @@ public class EmailIssueService implements EmailIssueSender {
     public void sendEmail(EmailIssue emailGen){
 		EmailIssue emailIssue=emailRepo.save(emailGen);
 		try {
+			
     	MimeMessage msg = mailSender.createMimeMessage();
     	MimeMessageHelper helper = new MimeMessageHelper(msg, true);
     	helper.setFrom(emailIssue.getFromEmail());
