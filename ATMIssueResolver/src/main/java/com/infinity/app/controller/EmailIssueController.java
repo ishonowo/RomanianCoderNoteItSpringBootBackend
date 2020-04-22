@@ -36,16 +36,8 @@ public class EmailIssueController {
             throw new ValidationException("This email has errors and cannot be sent.");
         }
 		System.out.println("I am in sendEmail.");
-		emailIssueService.sendEmail(
-        		emailIssue.getFrom(),
-        		emailIssue.getTo(),
-        		emailIssue.getCc(),
-        		emailIssue.getSubject(),
-        		emailIssue.getmIntro(),
-        		emailIssue.getmHeader(),
-        		emailIssue.getmBody(),
-        		emailIssue.getmEnd());
-        logger.info("Form submitted successfully. "+ emailIssue); 
+		emailIssueService.sendEmail(emailIssue);
+        logger.info("Email submitted successfully. "+ emailIssue); 
         
     }
 	

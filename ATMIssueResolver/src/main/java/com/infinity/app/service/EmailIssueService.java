@@ -24,14 +24,15 @@ import com.infinity.app.repo.EmailIssueRepo;
 @Service
 public class EmailIssueService implements EmailIssueSender {
 
+	@Autowired
 	private JavaMailSenderImpl mailSender;
 
 	@Autowired
 	private EmailIssueRepo emailRepo;
 
-	/*public EmailIssue save(EmailIssue emailIssueGen) {
-		return emailRepo.save(emailIssueGen);
-	}*/
+	//@Autowired
+	//private Environment environment;
+	
 	
 	public EmailIssueService(Environment environment) {
 		mailSender = new JavaMailSenderImpl();
@@ -43,21 +44,17 @@ public class EmailIssueService implements EmailIssueSender {
 	}
 
 	@Override
-    public void sendEmail(String fromEmail, String toEmail, String ccEmail, String subject,
-    		String mIntro, String[] mHeader, String[] mBody, String mEnd)
-    {
-		EmailIssue emailIssue= new EmailIssue(fromEmail, toEmail, ccEmail, subject,mIntro,mHeader,mBody,mEnd);
-		//String text=emailIssue.getBody();
-    	try {
+    public void sendEmail(EmailIssue emailGen){
+		EmailIssue emailIssue=emailRepo.save(emailGen);
+		try {
     	MimeMessage msg = mailSender.createMimeMessage();
     	MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-    	helper.setFrom(emailIssue.getFrom());
-    	helper.setTo(emailIssue.getTo());
+    	helper.setFrom(emailIssue.getFromEmail());
+    	helper.setTo(emailIssue.getToEmail());
     	helper.setCc(emailIssue.getCc());
         helper.setSubject(emailIssue.getSubject());
         helper.setText(emailIssue.getBody());
         mailSender.send(msg);
-        emailRepo.save(emailIssue);
     	} catch(MessagingException ex){
     		Logger.getLogger(EmailIssueService.class.getName()).log(Level.SEVERE, null, ex);
     	}

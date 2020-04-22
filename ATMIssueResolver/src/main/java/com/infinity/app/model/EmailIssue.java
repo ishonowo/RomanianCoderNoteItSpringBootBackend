@@ -23,11 +23,11 @@ public class EmailIssue {
 	
 	@NotNull
 	@Email
-	private String from;
+	private String fromEmail;
 	
 	@NotNull
 	@Size(min = 10)
-	private String to;
+	private String toEmail;
 	
 	@NotNull
 	@Size(min = 10)
@@ -89,20 +89,20 @@ public class EmailIssue {
 		this.id = id;
 	}
 
-	public String getFrom() {
-		return from;
+	public String getFromEmail() {
+		return fromEmail;
 	}
 
-	public void setFrom(String from) {
-		this.from = from;
+	public void setFromEmail(String fromEmail) {
+		this.fromEmail = fromEmail;
 	}
 
-	public String getTo() {
-		return to;
+	public String getToEmail() {
+		return toEmail;
 	}
 
-	public void setTo(String to) {
-		this.to = to;
+	public void setToEmail(String toEmail) {
+		this.toEmail = toEmail;
 	}
 
 	public String getCc() {
@@ -128,8 +128,8 @@ public class EmailIssue {
 			@NotNull @Size(min = 10) String cc, @NotNull @Size(min = 10) String subject, @NotNull String mIntro,
 			@NotNull String[] mHeader, @NotNull String[] mBody, @NotNull String mEnd) {
 		this.id = id;
-		this.from = from;
-		this.to = to;
+		this.fromEmail = from;
+		this.toEmail = to;
 		this.cc = cc;
 		this.subject = subject;
 		this.mIntro = mIntro;
@@ -141,8 +141,8 @@ public class EmailIssue {
 	public EmailIssue( @NotNull @Email String from, @NotNull @Size(min = 10) String to,
 			@NotNull @Size(min = 10) String cc, @NotNull @Size(min = 10) String subject, @NotNull String mIntro,
 			@NotNull String[] mHeader, @NotNull String[] mBody, @NotNull String mEnd) {
-		this.from = from;
-		this.to = to;
+		this.fromEmail = from;
+		this.toEmail = to;
 		this.cc = cc;
 		this.subject = subject;
 		this.mIntro = mIntro;
@@ -153,7 +153,7 @@ public class EmailIssue {
 
 	@Override
 	public String toString() {
-		return "EmailIssue [id=" + id + ", from=" + from + ", to=" + to + ", cc=" + cc + ", subject=" + subject
+		return "EmailIssue [id=" + id + ", fromEmail=" + fromEmail + ", toEmail=" + toEmail + ", cc=" + cc + ", subject=" + subject
 				+ ", mIntro=" + mIntro + ", mHeader=" + Arrays.toString(mHeader) + ", mBody=" + Arrays.toString(mBody)
 				+ ", mEnd=" + mEnd + "]";
 	}
@@ -162,11 +162,11 @@ public class EmailIssue {
 		
 		String tableHead=""; 
 		for(String h : mHeader) { 
-			tableHead= "<th>"+h+"</th>";
+			tableHead+= "<th>"+h+"</th>";
 		}
 		String tableBody="";
 		for(String b :mBody) {
-			tableBody="<th>"+b+"</th>";
+			tableBody+="<th>"+b+"</th>";
 		}
 		return "<p>"+ mIntro+"</p><table><thead><tr>"+ tableHead
 		        +"</tr></thead><tbody><tr>"+tableBody +"</tbody></table><br/><p>"+mEnd+"</p>";
