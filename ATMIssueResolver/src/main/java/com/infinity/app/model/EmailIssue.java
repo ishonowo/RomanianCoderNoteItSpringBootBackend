@@ -167,13 +167,13 @@ public class EmailIssue {
 				+ ", mEnd=" + mEnd + "]";
 	}
 
-	public String[] getToEmails() {
+	public String[] getToEmailArray() {
 		String[] toEmailArray=new String[toEmail.size()];
 		return toEmail.toArray(toEmailArray);
 	}	
 	
 	
-	public String[] getCcs() {
+	public String[] getCcArray() {
 		String[] ccArray=new String[cc.size()];
 		return toEmail.toArray(ccArray);
 	}	

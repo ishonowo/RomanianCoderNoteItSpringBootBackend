@@ -21,6 +21,8 @@ import com.infinity.app.mail.EmailIssueSender;
 import com.infinity.app.model.EmailIssue;
 import com.infinity.app.repo.EmailIssueRepo;
 
+import freemarker.template.Configuration;
+
 @Service
 public class EmailIssueService implements EmailIssueSender {
 
@@ -29,6 +31,9 @@ public class EmailIssueService implements EmailIssueSender {
 
 	@Autowired
 	private EmailIssueRepo emailRepo;
+	
+	@Autowired
+	private Configuration freemarkerConfig;
 
 	//@Autowired
 	//private Environment environment;
@@ -47,14 +52,17 @@ public class EmailIssueService implements EmailIssueSender {
     public void sendEmail(EmailIssue emailGen){
 		EmailIssue emailIssue=emailRepo.save(emailGen);
 		try {
-			
-    	MimeMessage msg = mailSender.createMimeMessage();
+		
+		MimeMessage msg = mailSender.createMimeMessage();
     	MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+    	//MimeMessageHelper helper = new MimeMessageHelper(msg,
+        //        MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+        //        StandardCharsets.UTF_8.name());
     	helper.setFrom(emailIssue.getFromEmail());
-    	helper.setTo(emailIssue.getToEmails());
-    	helper.setCc(emailIssue.getCcs());
+    	helper.setTo(emailIssue.getToEmailArray());
+    	helper.setCc(emailIssue.getCcArray());
         helper.setSubject(emailIssue.getSubject());
-        helper.setText(emailIssue.getBody());
+        helper.setText(emailIssue.getBody(),true);
         mailSender.send(msg);
     	} catch(MessagingException ex){
     		Logger.getLogger(EmailIssueService.class.getName()).log(Level.SEVERE, null, ex);
