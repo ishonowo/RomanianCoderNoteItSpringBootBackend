@@ -51,8 +51,8 @@ public class EmailIssueService implements EmailIssueSender {
     	MimeMessage msg = mailSender.createMimeMessage();
     	MimeMessageHelper helper = new MimeMessageHelper(msg, true);
     	helper.setFrom(emailIssue.getFromEmail());
-    	helper.setTo(emailIssue.getToEmail());
-    	helper.setCc(emailIssue.getCc());
+    	helper.setTo(emailIssue.getToEmails());
+    	helper.setCc(emailIssue.getCcs());
         helper.setSubject(emailIssue.getSubject());
         helper.setText(emailIssue.getBody());
         mailSender.send(msg);

@@ -1,8 +1,9 @@
 package com.infinity.app.model;
 
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,10 +28,12 @@ public class EmailIssue {
 	private String fromEmail;
 	
 	@NotNull
-	private String[] toEmail;
+	@ElementCollection
+	private List<String> toEmail;
 	
 	@NotNull
-	private String[] cc;
+	@ElementCollection
+	private List<String> cc;
 	
 	@NotNull
 	@Size(min = 10)
@@ -40,45 +43,15 @@ public class EmailIssue {
 	private String mIntro;
 	
 	@NotNull
-	private String[] mHeader;
+	@ElementCollection
+	private List<String> mHeader;
 	
 	@NotNull
-	private String[] mBody;
+	@ElementCollection
+	private List<String> mBody;
 	
 	@NotNull
 	private String  mEnd;
-
-	public String getmIntro() {
-		return mIntro;
-	}
-
-	public void setmIntro(String mIntro) {
-		this.mIntro = mIntro;
-	}
-
-	public String[] getmHeader() {
-		return mHeader;
-	}
-
-	public void setmHeader(String[] mHeader) {
-		this.mHeader = mHeader;
-	}
-
-	public String[] getmBody() {
-		return mBody;
-	}
-
-	public void setmBody(String[] mBody) {
-		this.mBody = mBody;
-	}
-
-	public String getmEnd() {
-		return mEnd;
-	}
-
-	public void setmEnd(String mEnd) {
-		this.mEnd = mEnd;
-	}
 
 	public Long getId() {
 		return id;
@@ -96,6 +69,21 @@ public class EmailIssue {
 		this.fromEmail = fromEmail;
 	}
 
+	public List<String> getToEmail() {
+		return toEmail;
+	}
+
+	public void setToEmail(List<String> toEmail) {
+		this.toEmail = toEmail;
+	}
+
+	public List<String> getCc() {
+		return cc;
+	}
+
+	public void setCc(List<String> cc) {
+		this.cc = cc;
+	}
 
 	public String getSubject() {
 		return subject;
@@ -105,29 +93,46 @@ public class EmailIssue {
 		this.subject = subject;
 	}
 
-
-	public String[] getToEmail() {
-		return toEmail;
+	public String getmIntro() {
+		return mIntro;
 	}
 
-	public void setToEmail(String[] toEmail) {
-		this.toEmail = toEmail;
+	public void setmIntro(String mIntro) {
+		this.mIntro = mIntro;
 	}
 
-	public String[] getCc() {
-		return cc;
+	public List<String> getmHeader() {
+		return mHeader;
 	}
 
-	public void setCc(String[] cc) {
-		this.cc = cc;
+	public void setmHeader(List<String> mHeader) {
+		this.mHeader = mHeader;
 	}
 
-	public EmailIssue() {}
+	public List<String> getmBody() {
+		return mBody;
+	}
 
+	public void setmBody(List<String> mBody) {
+		this.mBody = mBody;
+	}
 
-	public EmailIssue(Long id, @NotNull @Email String fromEmail, @NotNull String[] toEmail,
-			@NotNull String[] cc, @NotNull @Size(min = 10) String subject, @NotNull String mIntro,
-			@NotNull String[] mHeader, @NotNull String[] mBody, @NotNull String mEnd) {
+	public String getmEnd() {
+		return mEnd;
+	}
+
+	public void setmEnd(String mEnd) {
+		this.mEnd = mEnd;
+	}
+
+	public EmailIssue() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public EmailIssue(Long id, @NotNull @Email String fromEmail, @NotNull List<String> toEmail,
+			@NotNull List<String> cc, @NotNull @Size(min = 10) String subject, @NotNull String mIntro,
+			@NotNull List<String> mHeader, @NotNull List<String> mBody, @NotNull String mEnd) {
 		super();
 		this.id = id;
 		this.fromEmail = fromEmail;
@@ -140,9 +145,10 @@ public class EmailIssue {
 		this.mEnd = mEnd;
 	}
 
-	public EmailIssue(@NotNull @Email String fromEmail, @NotNull String[] toEmail,
-			@NotNull String[] cc, @NotNull @Size(min = 10) String subject, @NotNull String mIntro,
-			@NotNull String[] mHeader, @NotNull String[] mBody, @NotNull String mEnd) {
+
+	public EmailIssue(@NotNull @Email String fromEmail, @NotNull List<String> toEmail,
+			@NotNull List<String> cc, @NotNull @Size(min = 10) String subject, @NotNull String mIntro,
+			@NotNull List<String> mHeader, @NotNull List<String> mBody, @NotNull String mEnd) {
 		super();
 		this.fromEmail = fromEmail;
 		this.toEmail = toEmail;
@@ -154,14 +160,25 @@ public class EmailIssue {
 		this.mEnd = mEnd;
 	}
 
-
 	@Override
 	public String toString() {
-		return "EmailIssue [id=" + id + ", fromEmail=" + fromEmail + ", toEmail=" + Arrays.toString(toEmail) + ", cc="
-				+ Arrays.toString(cc) + ", subject=" + subject + ", mIntro=" + mIntro + ", mHeader="
-				+ Arrays.toString(mHeader) + ", mBody=" + Arrays.toString(mBody) + ", mEnd=" + mEnd + "]";
+		return "EmailIssue [id=" + id + ", fromEmail=" + fromEmail + ", toEmail=" + toEmail + ", cc=" + cc
+				+ ", subject=" + subject + ", mIntro=" + mIntro + ", mHeader=" + mHeader + ", mBody=" + mBody
+				+ ", mEnd=" + mEnd + "]";
 	}
 
+	public String[] getToEmails() {
+		String[] toEmailArray=new String[toEmail.size()];
+		return toEmail.toArray(toEmailArray);
+	}	
+	
+	
+	public String[] getCcs() {
+		String[] ccArray=new String[cc.size()];
+		return toEmail.toArray(ccArray);
+	}	
+	
+	
 	public String getBody() {
 		
 		String tableHead=""; 
@@ -175,5 +192,6 @@ public class EmailIssue {
 		return "<p>"+ mIntro+"</p><table><thead><tr>"+ tableHead
 		        +"</tr></thead><tbody><tr>"+tableBody +"</tbody></table><br/><p>"+mEnd+"</p>";
 	}
+	
 
 }
