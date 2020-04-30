@@ -175,7 +175,7 @@ public class EmailIssue {
 	
 	public String[] getCcArray() {
 		String[] ccArray=new String[cc.size()];
-		return toEmail.toArray(ccArray);
+		return cc.toArray(ccArray);
 	}	
 	
 	

@@ -35,7 +35,6 @@ public class EmailIssueController {
 		if(bindingResult.hasErrors()){
             throw new ValidationException("This email has errors and cannot be sent.");
         }
-		System.out.println("I am in sendEmail.");
 		emailIssueService.sendEmail(emailIssue);
         logger.info("Email submitted successfully. "+ emailIssue); 
         
