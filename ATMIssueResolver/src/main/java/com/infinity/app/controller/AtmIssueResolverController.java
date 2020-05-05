@@ -68,10 +68,6 @@ public class AtmIssueResolverController {
 		return atmIssue;				
 	}
 	
-	@PostMapping("/email")
-	public void submitLoggedIssue() {
-		System.out.println("I am in email.");
-	}
 
 
 
