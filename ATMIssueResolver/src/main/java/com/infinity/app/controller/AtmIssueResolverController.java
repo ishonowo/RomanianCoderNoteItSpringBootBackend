@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +27,7 @@ import com.infinity.app.service.AtmIssueService;
 
 @RestController
 @RequestMapping("/atm")
-@CrossOrigin()
+@CrossOrigin(origins="http://localhost:4200")
 public class AtmIssueResolverController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AtmIssueResolverController.class);
@@ -68,6 +70,11 @@ public class AtmIssueResolverController {
 		return atmIssue;				
 	}
 	
+	@DeleteMapping("/delete/{id}")
+	public void DeleteIssue(@PathVariable Long id) {
+		issueService.deleteById(id);
+		
+	}
 
 
 

@@ -16,5 +16,11 @@ public class AtmIssueService {
 		return issueRepo.save(atmIssueGen);
 	}
 
+	public void deleteById(Long id) {
+		// delete the issue logged because the user wants to restart
+		issueRepo.deleteById(id);
+		
+	}
+
 	
 }
