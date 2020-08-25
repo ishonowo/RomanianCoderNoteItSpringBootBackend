@@ -59,7 +59,7 @@ public class AtmIssueResolverController {
 		
 		AtmIssue atmIssueGen= new AtmIssue(issueLogged.getTerminalId(),issueLogged.getIssueDesc(),
 				issueLogged.getBranchLogger(),issueLogged.getLoggerEmail(),issueLogged.getLoggerPhoneNo(),
-				new Date(),"ATMSupport@fidelitybank.ng",atmDetail.getContact(),atmDetail.getBranchEmail(),
+				new Date(),issueLogged.getUserEmail(),atmDetail.getContact(),atmDetail.getBranchEmail(),
 				atmDetail.getBranchName(),atmDetail.getAtmName(),atmDetail.getPhysicalAddress(),
 				atmDetail.getVendorName());
 		
